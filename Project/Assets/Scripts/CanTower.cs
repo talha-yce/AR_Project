@@ -9,7 +9,7 @@ public class CanTower : MonoBehaviour
     public float yatayBosluk = 0.2f;
     public float dikeyBosluk = 0.21f;
     public int satirSayisi = 5;
-    public Material[] renkler; // 3 farklı renk materyalini buraya ekleyin: kırmızı, yeşil, mavi
+    public Material[] renkler; 
 
     public List<List<int>> sayilar = new List<List<int>>();
     public List<GameObject> kutuListesi = new List<GameObject>();
@@ -68,16 +68,17 @@ public class CanTower : MonoBehaviour
                 if (sayiText != null)
                 {
                     sayiText.text = sayilar[satir][sutun].ToString();
-                    sayiText.color = Color.black; // Yazı rengini siyah yap
-                    sayiText.fontStyle = FontStyles.Bold; // Yazı stilini kalın yap
+                    sayiText.color = Color.black; 
+                    sayiText.fontStyle = FontStyles.Bold; 
+                    sayiText.fontSize = 60; 
                 }
 
-                // Center nesnesine erişmek için güncelleme
+                
                 Transform center = kutu.transform.Find("TenekeKutu/Center");
                 if (center != null && renkler.Length > 0)
                 {
                     int renkIndeksi = Random.Range(0, renkler.Length);
-                    Debug.Log($"Renk İndeksi: {renkIndeksi}"); // Renk indeksini kontrol et
+                    Debug.Log($"Renk İndeksi: {renkIndeksi}"); 
                     center.GetComponent<Renderer>().material = renkler[renkIndeksi];
                 }
             }
@@ -104,10 +105,24 @@ public class CanTower : MonoBehaviour
                 if (sayiText != null)
                 {
                     sayiText.text = "?";
-                    sayiText.color = Color.black; // Yazı rengini siyah yap
-                    sayiText.fontStyle = FontStyles.Bold; // Yazı stilini kalın yap
+                    sayiText.color = Color.black; 
+                    sayiText.fontStyle = FontStyles.Bold; 
+                    sayiText.fontSize = 60; 
                 }
             }
         }
     }
+public void GuncelleSayi(int satir, int sutun, int yeniDeger)
+{
+    if (satir >= 0 && satir < sayilar.Count && sutun >= 0 && sutun < sayilar[satir].Count)
+    {
+        sayilar[satir][sutun] = yeniDeger;
+        GameObject kutu = kutuListesi[satir * (satir + 1) / 2 + sutun];
+        TMP_Text sayiText = kutu.GetComponentInChildren<TMP_Text>();
+        if (sayiText != null)
+        {
+            sayiText.text = yeniDeger.ToString();
+        }
+    }
 }
+ }
