@@ -1,59 +1,73 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public CanTower canTower;
-    public TMP_InputField satirInputField;
-    public TMP_InputField sutunInputField;
     public TMP_InputField tahminInputField;
+    public TextMeshProUGUI sonucText;
     public Button kontrolEtButton;
-    public TMP_Text sonucText;
+    public CanTower canTower;
+
+    private int seciliSatir = -1;
+    private int seciliSutun = -1;
 
     private void Start()
     {
         kontrolEtButton.onClick.AddListener(KontrolEt);
     }
 
+    // Kullanıcının tahminini kontrol etme
     private void KontrolEt()
-{
-    if (int.TryParse(satirInputField.text, out int goruntuSatir) &&
-        int.TryParse(sutunInputField.text, out int goruntuSutun) &&
-        int.TryParse(tahminInputField.text, out int tahmin))
     {
-        
-        int satir = canTower.satirSayisi - goruntuSatir;
-        int sutun = goruntuSutun - 1;
-
-        if (canTower != null && 
-            satir >= 0 && satir < canTower.satirSayisi &&
-            sutun >= 0 && sutun < canTower.sayilar[satir].Count)
+        if (int.TryParse(tahminInputField.text, out int tahmin))
         {
-            int dogruSayi = canTower.sayilar[satir][sutun];
-            if (tahmin == dogruSayi)
+            if (seciliSatir != -1 && seciliSutun != -1)
             {
-                sonucText.text = "Doğru Tahmin!";
-                sonucText.color = Color.green;
-                canTower.GuncelleSayi(satir, sutun, tahmin);
+                int dogruSayi = canTower.OrijinalSayiyiAl(seciliSatir, seciliSutun);
+
+                if (canTower.eksikKonumlar.Contains(new Vector2Int(seciliSatir, seciliSutun))) // Eksik konum kontrolü
+                {
+                    if (tahmin == dogruSayi)
+                    {
+                        sonucText.text = "Doğru Tahmin!";
+                        sonucText.color = Color.green;
+                        canTower.GuncelleSayi(seciliSatir, seciliSutun, tahmin);
+                    }
+                    else
+                    {
+                        sonucText.text = $"Yanlış Tahmin. Doğru değer: {dogruSayi}";
+                        sonucText.color = Color.red;
+                    }
+                }
+                else
+                {
+                    sonucText.text = "Bu kutu zaten dolu.";
+                    sonucText.color = Color.red;
+                }
             }
             else
             {
-                sonucText.text = "Yanlış Tahmin. Tekrar deneyin.";
+                sonucText.text = "Lütfen önce bir kutu seçin.";
                 sonucText.color = Color.red;
             }
         }
         else
         {
-            sonucText.text = $"Geçersiz satır veya sütun. Lütfen satır için 1-{canTower.satirSayisi}, " +
-                             $"sütun için 1-{goruntuSatir} arası bir değer girin.";
+            sonucText.text = "Lütfen geçerli bir sayı girin.";
             sonucText.color = Color.red;
         }
+
+        seciliSatir = -1;
+        seciliSutun = -1;
+        kontrolEtButton.interactable = false;
     }
-    else
+
+    // Kutu seçildiğinde satır ve sütun numarasını belirleme
+    public void KutuSec(int satir, int sutun)
     {
-        sonucText.text = "Lütfen geçerli sayılar girin.";
-        sonucText.color = Color.red;
+        seciliSatir = satir;
+        seciliSutun = sutun;
+        kontrolEtButton.interactable = true;
     }
-}
 }
