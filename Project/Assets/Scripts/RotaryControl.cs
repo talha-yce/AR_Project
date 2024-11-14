@@ -14,8 +14,6 @@ public class RotaryControl : MonoBehaviour, IDragHandler, IEndDragHandler
     void Start()
     {
         rotaryRectTransform = GetComponent<RectTransform>();
-        keySpawner = FindObjectOfType<KeySpawner>();
-        keySpawner.SpawnKey();
         circleRaycast = GetComponent<CircleRaycast>(); 
     }
 
