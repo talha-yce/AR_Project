@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI sonucText;
     public Button kontrolEtButton;
     public CanTower canTower;
+    
 
     private int seciliSatir = -1;
     private int seciliSutun = -1;
