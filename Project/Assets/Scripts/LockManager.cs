@@ -1,47 +1,123 @@
- using UnityEngine;
+using UnityEngine;
 
 public class LockManager : MonoBehaviour
 {
-    public Transform lockDial; // Kilidin dönen kısmı
-    public float correctAngle = 285f; // Doğru konuma karşılık gelen açı (Unity'de -75 dereceye denk)
-    public float tolerance = 15f; // Kabul edilebilir hata payı
+    [SerializeField] private int tolerance = 5; // Toleransı azalttık
+    [SerializeField] private Animator lockAnimator;
 
-    public Animator lockAnimator; // Animator bileşenini public yaparak inspector'dan atama yapılabilir
+    private int correctAngle;
+    private int currentAngle;
+    private GameManager gameManager;
+    private RotaryControl rotaryControl;
 
-    void Start()
+    private readonly int[] validAngles = { 0, 36, 72, 108, 144, 180, 216, 252, 288, 324 };
+
+    private void Start()
+    {
+        InitializeComponents();
+    }
+
+    private void InitializeComponents()
     {
         if (lockAnimator == null)
         {
             Debug.LogError("Animator bileşeni 'LockManager' GameObject'ine atanmadı. Lütfen Animator bileşenini atayın.");
         }
+
+        gameManager = GameManager.Instance;
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager bulunamadı. Lütfen sahnede bir GameManager olduğundan emin olun.");
+        }
+
+        rotaryControl = FindObjectOfType<RotaryControl>();
+        if (rotaryControl == null)
+        {
+            Debug.LogError("RotaryControl bulunamadı. Lütfen sahnede bir RotaryControl olduğundan emin olun.");
+        }
     }
 
     public void CheckCombination()
     {
-        float dialAngle = lockDial.localEulerAngles.x;
+        int closestValidAngle = FindClosestValidAngle(currentAngle);
+        bool isCorrect = Mathf.Abs(closestValidAngle - correctAngle) <= tolerance;
 
-        // Eğer açı doğru aralıkta değilse kilidi otomatik olarak doğru konuma getir
-        if (dialAngle < correctAngle - tolerance || dialAngle > correctAngle + tolerance)
+        if (isCorrect)
         {
-            Debug.Log("Yanlış konum! Doğru konuma getiriliyor...");
-            PlayVibrateAnimation(); // Yanlış konumda vibrate animasyonunu oynat
+            HandleCorrectCombination();
         }
         else
         {
-            Debug.Log("Kilit açıldı!");
-            PlayOpenAnimation(); // Doğru konumda open animasyonunu oynat
+            HandleWrongCombination();
         }
     }
 
-    private void PlayOpenAnimation()
+    private int FindClosestValidAngle(int angle)
     {
-        // "Open" animasyonunu oynat
-        lockAnimator.SetTrigger("Open");
+        int closestAngle = validAngles[0];
+        int minDifference = Mathf.Abs(angle - validAngles[0]);
+
+        foreach (int validAngle in validAngles)
+        {
+            int difference = Mathf.Abs(angle - validAngle);
+            if (difference < minDifference)
+            {
+                minDifference = difference;
+                closestAngle = validAngle;
+            }
+        }
+
+        return closestAngle;
     }
 
-    private void PlayVibrateAnimation()
+    private void HandleCorrectCombination()
     {
-        // "Vibrate" animasyonunu oynat
-        lockAnimator.SetTrigger("Vibrate");
+        Debug.Log("Doğru konum!");
+        PlayVibrateAnimation();
+        gameManager.IncrementStep();
+    }
+
+    private void HandleWrongCombination()
+    {
+        Debug.Log("Yanlış konum!");
+        gameManager.SetGameState(GameManager.GameState.WaitingForInput);
+    }
+
+    public void PlayOpenAnimation() => PlayAnimation("Open");
+    public void PlayVibrateAnimation() => PlayAnimation("Vibrate");
+
+    private void PlayAnimation(string triggerName)
+    {
+        if (lockAnimator != null)
+        {
+            lockAnimator.SetTrigger(triggerName);
+        }
+    }
+
+    public void SetCorrectAngle(int angle)
+    {
+        correctAngle = FindClosestValidAngle(angle);
+    }
+
+    public void SetCurrentAngle(int angle)
+    {
+        currentAngle = angle;
+    }
+
+    public int GetCorrectAngle() => correctAngle;
+
+    public void ResetLock()
+    {
+        currentAngle = 0;
+        if (rotaryControl != null)
+        {
+            rotaryControl.ResetRotation();
+        }
+    }
+
+    public bool IsCorrectPosition()
+    {
+        int closestValidAngle = FindClosestValidAngle(currentAngle);
+        return Mathf.Abs(closestValidAngle - correctAngle) <= tolerance;
     }
 }

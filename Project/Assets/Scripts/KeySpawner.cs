@@ -1,40 +1,76 @@
-// KeySpawner.cs
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class KeySpawner : MonoBehaviour
 {
-    public GameObject keyPrefab;
-    public Transform[] spawnPoints;  // 6 spawn noktası atanacak
-    public TextMeshProUGUI sonucText;
+    [SerializeField] private GameObject keyPrefab;
+    [SerializeField] private Transform[] spawnPoints;  // 6 spawn noktası atanacak
+    [SerializeField] private TextMeshProUGUI sonucText;
     
-    private int currentStep = 0;
-    private LockManager lockManager;
+    private GameManager gameManager;
 
-    void Start()
+    private void Awake()
+{
+    gameManager = GameManager.Instance;
+    if (gameManager == null)
     {
-        lockManager = FindObjectOfType<LockManager>();
-        SpawnKey();
+        Debug.LogError("GameManager instance not found in KeySpawner!");
     }
+}
 
     public void SpawnKey()
     {
-        if (currentStep >= 4) return; // 4 key'den sonra spawn etme
-
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        GameObject key = Instantiate(keyPrefab, spawnPoint);
-        
-        int randomAngle = GenerateRandomAngle();
-        key.GetComponentInChildren<RotaryControl>().SetTargetAngle(randomAngle);
-
-        currentStep++;
-    }
-
-    private int GenerateRandomAngle()
+        Debug.Log("SpawnKey method called in KeySpawner");
+        if (gameManager == null)
     {
-        int[] angles = { 0, 100, 200, 300, 400, 500, 600, 700, 800, 900 };
-        return angles[Random.Range(0, angles.Length)];
+        Debug.LogError("GameManager is null in KeySpawner!");
+        return;
+    }
+        if (gameManager.CurrentGameState != GameManager.GameState.SpawningKey)
+        {
+            Debug.LogWarning("Attempting to spawn key in incorrect game state.");
+            return;
+        }
+
+        if (spawnPoints.Length == 0)
+    {
+        Debug.LogError("No spawn points assigned to KeySpawner!");
+        return;
     }
 
+    Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+    GameObject key = Instantiate(keyPrefab, spawnPoint);
+
+    KeyController keyController = key.GetComponent<KeyController>();
+    if (keyController != null)
+    {
+        keyController.Initialize(this);
+    }
+    else
+    {
+        Debug.LogError("KeyController component not found on spawned key!");
+    }
+        
+        UpdateUI();
+
+        gameManager.SetGameState(GameManager.GameState.WaitingForKeyInteraction);
+    }
+
+    private void UpdateUI()
+    {
+        if (sonucText != null)
+        {
+            sonucText.text = $"Anahtar {gameManager.currentStep + 1}/{GameManager.MaxSteps}";
+        }
+        else
+        {
+            Debug.LogWarning("sonucText is not assigned in KeySpawner!");
+        }
+    }
+
+    // Bu metod, anahtar bulunduğunda çağrılacak
+    public void KeyFound()
+    {
+        gameManager.KeyCollected();
+    }
 }

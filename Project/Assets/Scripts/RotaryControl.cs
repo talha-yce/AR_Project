@@ -1,79 +1,103 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RotaryControl : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    public Transform lockDial; 
-    private KeySpawner keySpawner; 
+    [SerializeField] private Transform lockDial;
+    [SerializeField] private Text targetText;
+    
     private RectTransform rotaryRectTransform;
     private float currentAngle = 0;
     private int targetAngle;
     
-    private CircleRaycast circleRaycast; // CircleRaycast referansı
+    private GameManager gameManager;
+    private LockManager lockManager;
 
-    void Start()
+    private void Start()
     {
         rotaryRectTransform = GetComponent<RectTransform>();
-        circleRaycast = GetComponent<CircleRaycast>(); 
+        gameManager = GameManager.Instance;
+        lockManager = FindObjectOfType<LockManager>();
+
+        if (gameManager == null)
+            Debug.LogError("GameManager instance not found!");
+        if (lockManager == null)
+            Debug.LogError("LockManager not found in the scene!");
     }
 
     public void SetTargetAngle(int angle)
     {
         targetAngle = angle;
-        UpdateTargetText(angle); // UI'da hedef açıyı güncelle
+        UpdateTargetText(angle);
     }
 
     private void UpdateTargetText(int angle)
     {
-        // Text UI elementini bul ve açıyı güncelle
-        // Örneğin: `targetText.text = $"Rotate to {angle}";`
+        if (targetText != null)
+        {
+            targetText.text = $"Rotate to {angle}°";
+        }
+        else
+        {
+            Debug.LogWarning("Target Text is not assigned in RotaryControl!");
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        // Eğer tıklama daire içinde değilse, döndürme işlemini yapma
-        if (!IsClickInsideCircle(eventData))
-        {
+        if (!IsClickInsideCircle(eventData) || gameManager.CurrentGameState != GameManager.GameState.WaitingForInput)
             return;
-        }
 
-        // UI elemanını döndürmek için açıyı hesapla
         Vector2 direction = eventData.position - (Vector2)rotaryRectTransform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float newAngle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 360) % 360;
 
-        // Yeni açıyı döndürme işlemi için kullan
-        float angleDelta = angle - currentAngle;
-        currentAngle = angle;
+        float angleDelta = Mathf.DeltaAngle(currentAngle, newAngle);
+        currentAngle = newAngle;
 
-        // Rotary UI'yi döndür
         rotaryRectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
-
-        // Kilit modelindeki orta kısmı döndür
         lockDial.Rotate(angleDelta, 0, 0);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Döndürmeyi bıraktığınızda mevcut açıyı kaydedin
-        currentAngle = rotaryRectTransform.eulerAngles.z;
+        if (gameManager.CurrentGameState != GameManager.GameState.WaitingForInput)
+            return;
 
-        // Kullanıcı döndürmeyi bıraktığında kombinasyonu kontrol et
-        FindObjectOfType<LockManager>().CheckCombination();
+        currentAngle = NormalizeAngle(rotaryRectTransform.eulerAngles.z);
+        lockManager.SetCurrentAngle((int)currentAngle);
+        gameManager.SetGameState(GameManager.GameState.CheckingLock);
     }
 
-    // Daire içinde tıklanıp tıklanmadığını kontrol eden fonksiyon
     private bool IsClickInsideCircle(PointerEventData eventData)
     {
-        RectTransform rectTransform = rotaryRectTransform;
-        Vector2 localPoint;
-        
-        // Ekran noktasını yerel koordinata çevir
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out localPoint);
-        
-        // Yarıçapı hesapla
-        float radius = rectTransform.rect.width / 2;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rotaryRectTransform, eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
+        {
+            return localPoint.magnitude <= rotaryRectTransform.rect.width / 2;
+        }
+        return false;
+    }
 
-        // Tıklamanın merkezden olan mesafesini kontrol et
-        return localPoint.magnitude <= radius;
+    public float GetCurrentAngle() => currentAngle;
+
+    private float NormalizeAngle(float angle)
+    {
+        angle %= 360;
+        if (angle < 0)
+            angle += 360;
+        return angle;
+    }
+    public void ResetRotation()
+    {
+        currentAngle = 0;
+        rotaryRectTransform.rotation = Quaternion.identity;
+        if (lockDial != null)
+        {
+            lockDial.rotation = Quaternion.identity;
+        }
+        else
+        {
+            Debug.LogWarning("lockDial is not assigned in RotaryControl!");
+        }
     }
 }
