@@ -7,10 +7,17 @@ public class KeySpawner : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;  // 6 spawn noktası atanacak
     [SerializeField] private TextMeshProUGUI sonucText;
     
-    private GameManager gameManager;
+    public GameManager gameManager;
 
     private void Awake()
 {
+    StartCoroutine(DelayedStart());
+}
+    
+private System.Collections.IEnumerator DelayedStart()
+{
+    yield return new WaitForSeconds(0.3f); // 0.3 saniye bekle
+
     gameManager = GameManager.Instance;
     if (gameManager == null)
     {

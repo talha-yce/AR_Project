@@ -46,6 +46,7 @@ public class RotaryControl : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log($"sılındır tıklamaya başlandı");
         if (!IsClickInsideCircle(eventData) || gameManager.CurrentGameState != GameManager.GameState.WaitingForInput)
             return;
 

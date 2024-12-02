@@ -3,7 +3,7 @@ using TMPro; // TextMeshPro kullanımı için
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
 
     public enum GameState
     {
@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
     else if (Instance != this)
     {
         Destroy(gameObject);
-        return;
     }
 
     // KeySpawner'ı burada ayarlayalım
@@ -53,14 +52,7 @@ public class GameManager : MonoBehaviour
 
 private void Start()
 {
-    StartCoroutine(DelayedStart());
-}
-
-private System.Collections.IEnumerator DelayedStart()
-{
-    yield return new WaitForSeconds(0.1f); // 0.1 saniye bekle
     StartGame();
-    Debug.Log("Game started, current state: " + CurrentGameState);
 }
 
     public void SetGameState(GameState newState)

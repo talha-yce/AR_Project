@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LockManager : MonoBehaviour
 {
-    [SerializeField] private int tolerance = 5; // Toleransı azalttık
+    [SerializeField] private int tolerance = 10; // Toleransı azalttık
     [SerializeField] private Animator lockAnimator;
 
     private int correctAngle;
@@ -96,12 +96,22 @@ public class LockManager : MonoBehaviour
 
     public void SetCorrectAngle(int angle)
     {
-        correctAngle = FindClosestValidAngle(angle);
+        correctAngle = FindClosestValidAngle(NormalizeAngle(angle));
     }
 
     public void SetCurrentAngle(int angle)
     {
         currentAngle = angle;
+    }
+
+    private int NormalizeAngle(int angle)
+    {
+        angle = angle % 360;
+        if (angle < 0)
+        {
+            angle += 360;
+        }
+        return angle;
     }
 
     public int GetCorrectAngle() => correctAngle;
