@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class RotaryControl : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Transform lockDial;
-    [SerializeField] private Text targetText;
     
     private RectTransform rotaryRectTransform;
     private float currentAngle = 0;
@@ -29,19 +28,7 @@ public class RotaryControl : MonoBehaviour, IDragHandler, IEndDragHandler
     public void SetTargetAngle(int angle)
     {
         targetAngle = angle;
-        UpdateTargetText(angle);
-    }
-
-    private void UpdateTargetText(int angle)
-    {
-        if (targetText != null)
-        {
-            targetText.text = $"Rotate to {angle}°";
-        }
-        else
-        {
-            Debug.LogWarning("Target Text is not assigned in RotaryControl!");
-        }
+       
     }
 
     public void OnDrag(PointerEventData eventData)
