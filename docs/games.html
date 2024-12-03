@@ -4,50 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eğlenceli Oyunlarımız - SkyKids AR</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- AOS Animasyonlar -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Bubblegum Sans Yazı Tipi -->
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <!-- Özel Stil -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <img src="img/logo.png" alt="SkyKids AR Logo" class="logo">
-            <ul>
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li><a href="games.html">Oyunlarımız</a></li>
-                <li><a href="about.html">Hakkımızda</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-            </ul>
+<body class="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 transition-all duration-500">
+    <!-- Navbar -->
+    <header class="bg-white shadow-lg fixed w-full z-10">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-36 transform hover:scale-110 transition duration-300">
+                </a>                
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Ana Sayfa</a></li>
+                    <li><a href="games.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Oyunlarımız</a></li>
+                    <li><a href="about.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Hakkımızda</a></li>
+                    <li><a href="contact.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">İletişim</a></li>
+                </ul>
+                <button class="md:hidden focus:outline-none">
+                    <svg class="w-8 h-8 text-blue-600 hover:text-blue-800 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Süper Eğlenceli AR Oyunlarımız</h1>
-        <section class="games">
-            <div class="game">
-                <img src="img/game1.jpg" alt="Uçan Dostlar" class="game-image">
-                <h3>Uçan Dostlar</h3>
-                <p>Gökyüzünde arkadaşlarınla maceraya atıl!</p>
-                <button class="play-button">Oyna</button>
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 container mx-auto px-6 py-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-blue-800 text-center mb-12" data-aos="zoom-in">Süper Eğlenceli AR Oyunlarımız</h1>
+        <section class="games grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Oyun Kartı 1 -->
+            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative">
+                    <img src="img/game1.jpg" alt="Uçan Dostlar" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
+                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Uçan Dostlar</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">Gökyüzünde arkadaşlarınla maceraya atıl!</p>
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Oyna</button>
+                </div>
             </div>
-            <div class="game">
-                <img src="img/game2.jpg" alt="Gökyüzü Macerası" class="game-image">
-                <h3>Gökyüzü Macerası</h3>
-                <p>Süper kahraman ol, gökyüzünde uç!</p>
-                <button class="play-button">Oyna</button>
+            <!-- Oyun Kartı 2 -->
+            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="relative">
+                    <img src="img/game2.jpg" alt="Gökyüzü Macerası" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
+                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Gökyüzü Macerası</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">Süper kahraman ol, gökyüzünde uç!</p>
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Oyna</button>
+                </div>
             </div>
-            <div class="game">
-                <img src="img/game3.jpg" alt="Dünya Turu" class="game-image">
-                <h3>Dünya Turu</h3>
-                <p>Dünyayı keşfet, yeni şeyler öğren!</p>
-                <button class="play-button">Oyna</button>
+            <!-- Oyun Kartı 3 -->
+            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                <div class="relative">
+                    <img src="img/game3.jpg" alt="Dünya Turu" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
+                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Dünya Turu</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">Dünyayı keşfet, yeni şeyler öğren!</p>
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Oyna</button>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+        </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        // Navbar scroll efekti
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-opacity-100');
+                navbar.classList.remove('bg-opacity-90');
+            } else {
+                navbar.classList.add('bg-opacity-90');
+                navbar.classList.remove('bg-opacity-100');
+            }
+        });
+
+        // Menü açma/kapama
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.querySelector('nav ul');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

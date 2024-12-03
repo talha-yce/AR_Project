@@ -88,7 +88,7 @@ public class LockManager : MonoBehaviour
 
     private void PlayAnimation(string triggerName)
     {
-        if (lockAnimator != null)
+        if (triggerName != null)
         {
             lockAnimator.SetTrigger(triggerName);
         }

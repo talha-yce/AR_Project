@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI sonucText;
     public Button kontrolEtButton;
     public CanTower canTower;
+      [SerializeField] private GameObject endGameMenu;
     
 
     private int seciliSatir = -1;
@@ -17,6 +19,12 @@ public class UIManager : MonoBehaviour
     {
         kontrolEtButton.onClick.AddListener(KontrolEt);
     }
+
+    private void Awake()
+    {if (endGameMenu != null)
+    {
+        endGameMenu.SetActive(false); // Paneli başlangıçta gizle
+    }}
 
     // Kullanıcının tahminini kontrol etme
     private void KontrolEt()
@@ -62,6 +70,12 @@ public class UIManager : MonoBehaviour
         seciliSatir = -1;
         seciliSutun = -1;
         kontrolEtButton.interactable = false;
+
+        // Eğer eksik kutu kalmamışsa (oyun bitmiş)
+        if (canTower.eksikKonumlar.Count == 0)
+        {
+            EndGame();
+        }
     }
 
     // Kutu seçildiğinde satır ve sütun numarasını belirleme
@@ -70,5 +84,21 @@ public class UIManager : MonoBehaviour
         seciliSatir = satir;
         seciliSutun = sutun;
         kontrolEtButton.interactable = true;
+    }
+
+     private void EndGame()
+    {
+        Debug.Log("EndGame triggered");
+       endGameMenu.SetActive(true);
+    }
+
+   public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

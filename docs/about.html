@@ -4,37 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hakkımızda - SkyKids AR</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <img src="img/logo.png" alt="SkyKids AR Logo" class="logo">
-            <ul>
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li><a href="games.html">Oyunlarımız</a></li>
-                <li><a href="about.html">Hakkımızda</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-            </ul>
+<body class="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 transition-all duration-500">
+    <!-- Navbar -->
+    <header class="bg-white shadow-lg fixed w-full z-10">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-36 transform hover:scale-110 transition duration-300">
+                </a>                
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Ana Sayfa</a></li>
+                    <li><a href="games.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Oyunlarımız</a></li>
+                    <li><a href="about.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Hakkımızda</a></li>
+                    <li><a href="contact.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">İletişim</a></li>
+                </ul>
+                <button class="md:hidden focus:outline-none">
+                    <svg class="w-8 h-8 text-blue-600 hover:text-blue-800 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Biz Kimiz?</h1>
-        <section class="about-content">
-            <div class="team-image-container">
-                <img src="img/team.jpg" alt="SkyKids AR Ekibi" class="team-image">
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 container mx-auto px-6 py-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-blue-800 text-center mb-12" data-aos="zoom-in">Biz Kimiz?</h1>
+        <section class="about-content bg-white rounded-3xl shadow-xl overflow-hidden" data-aos="fade-up">
+            <div class="md:flex">
+                <div class="md:w-1/2">
+                    <div class="team-image-container h-full">
+                        <img src="img/team.jpg" alt="SkyKids AR Ekibi" class="team-image w-full h-full object-cover rounded-l-3xl">
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-8">
+                    <p class="text-gray-700 mb-6 text-lg leading-relaxed" data-aos="fade-left" data-aos-delay="200">
+                        Biz SkyKids AR ekibi olarak, çocukların uçak yolculuklarını daha eğlenceli ve öğretici hale getirmeyi amaçlıyoruz. Deneyimli geliştiriciler ve eğitimcilerden oluşan ekibimiz, çocukların hayal gücünü harekete geçiren ve aynı zamanda öğrenmelerini sağlayan AR oyunları tasarlıyor.
+                    </p>
+                    <p class="text-gray-700 mb-6 text-lg leading-relaxed" data-aos="fade-left" data-aos-delay="400">
+                        Misyonumuz, her çocuğun uçak yolculuğunu unutulmaz bir maceraya dönüştürmek!
+                    </p>
+                    <p class="text-gray-700 mb-6 text-lg leading-relaxed" data-aos="fade-left" data-aos-delay="600">
+                        Ekibimiz, inovasyon ve eğlenceyi bir araya getirerek çocukların mutluluğunu ve gelişimini desteklemeye devam ediyor.
+                    </p>
+                    <div class="flex justify-center" data-aos="zoom-in" data-aos-delay="800">
+                        <a href="contact.html" class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Bize Ulaşın</a>
+                    </div>
+                </div>
             </div>
-            <p>Biz SkyKids AR ekibi olarak, çocukların uçak yolculuklarını daha eğlenceli ve öğretici hale getirmeyi amaçlıyoruz. Deneyimli geliştiriciler ve eğitimcilerden oluşan ekibimiz, çocukların hayal gücünü harekete geçiren ve aynı zamanda öğrenmelerini sağlayan AR oyunları tasarlıyor.</p>
-            <p>Misyonumuz, her çocuğun uçak yolculuğunu unutulmaz bir maceraya dönüştürmek!</p>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-4">&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-yellow-400 transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.67 0H1.33C.6 0 0 .6 0 1.33v21.33C0 23.4.6 24 1.33 24H12.8v-9.33H9.6V11h3.2V8.13c0-3.2 1.87-4.8 4.72-4.8 1.38 0 2.82.25 2.82.25v3.09H18c-1.62 0-2.13.97-2.13 2.08v2.53h4.27l-.68 3.67h-3.6V24h7.07c.73 0 1.33-.6 1.33-1.33V1.33C24 .6 23.4 0 22.67 0z"/></svg>
+                </a>
+                <a href="#" class="hover:text-yellow-400 transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 4.56v15.08c0 2.52-2.28 4.36-4.44 3.8l-15.72-4c-1.76-.44-2.84-1.88-2.84-3.6V8.96c0-1.72 1.08-3.16 2.84-3.6l15.72-4c2.16-.56 4.44 1.28 4.44 3.8z"/></svg>
+                </a>
+            </div>
+        </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

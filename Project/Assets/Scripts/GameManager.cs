@@ -1,5 +1,7 @@
 using UnityEngine;
-using TMPro; // TextMeshPro kullanımı için
+using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private KeySpawner keySpawner;
     [SerializeField] private LockManager lockManager;
     [SerializeField] private RotaryControl rotaryControl;
+    [SerializeField] private GameObject endGameMenu;
 
     public GameState CurrentGameState { get; private set; }
     public int currentStep { get; private set; } = 0; 
@@ -28,32 +31,37 @@ public class GameManager : MonoBehaviour
     private string currentMathProblem;
 
     private void Awake()
-{
-    if (Instance == null)
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-    else if (Instance != this)
-    {
-        Destroy(gameObject);
-    }
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
 
-    // KeySpawner'ı burada ayarlayalım
-    if (keySpawner == null)
-    {
-        keySpawner = FindObjectOfType<KeySpawner>();
+        // KeySpawner'ı burada ayarlayalım
         if (keySpawner == null)
         {
-            Debug.LogError("KeySpawner component not found in the scene!");
+            keySpawner = FindObjectOfType<KeySpawner>();
+            if (keySpawner == null)
+            {
+                Debug.LogError("KeySpawner component not found in the scene!");
+            }
         }
-    }
-}
 
-private void Start()
-{
-    StartGame();
-}
+        if (endGameMenu != null)
+    {
+        endGameMenu.SetActive(false); // Paneli başlangıçta gizle
+    }
+    }
+
+    private void Start()
+    {
+        StartGame();
+    }
 
     public void SetGameState(GameState newState)
     {
@@ -84,19 +92,19 @@ private void Start()
     }
 
     private void SpawnNewKey()
-{
-    Debug.Log("Attempting to spawn new key...");
-    if (keySpawner != null)
     {
-        keySpawner.SpawnKey();
-        Debug.Log("Key spawned successfully.");
-        SetGameState(GameState.WaitingForKeyInteraction);
+        Debug.Log("Attempting to spawn new key...");
+        if (keySpawner != null)
+        {
+            keySpawner.SpawnKey();
+            Debug.Log("Key spawned successfully.");
+            SetGameState(GameState.WaitingForKeyInteraction);
+        }
+        else
+        {
+            Debug.LogError("KeySpawner is not assigned in GameManager!");
+        }
     }
-    else
-    {
-        Debug.LogError("KeySpawner is not assigned in GameManager!");
-    }
-}
 
     private void DisplayMathProblem()
     {
@@ -106,34 +114,33 @@ private void Start()
     }
 
     private void GenerateMathProblem()
-{
-    int[] possibleValues = { 0, 100, 200, 300, 400, 500, 600, 700, 800, 900 };
-    int resultIndex = Random.Range(0, possibleValues.Length);
-    int targetValue = possibleValues[resultIndex];
-
-    int num1, num2;
-    bool isAddition = Random.value > 0.5f;
-
-    if (isAddition)
     {
-        num1 = Random.Range(0, targetValue + 1);
-        num2 = targetValue - num1;
-        currentMathProblem = $"{num1} + {num2}";
+        int[] possibleValues = { 0, 100, 200, 300, 400, 500, 600, 700, 800, 900 };
+        int resultIndex = Random.Range(0, possibleValues.Length);
+        int targetValue = possibleValues[resultIndex];
+
+        int num1, num2;
+        bool isAddition = Random.value > 0.5f;
+
+        if (isAddition)
+        {
+            num1 = Random.Range(0, targetValue + 1);
+            num2 = targetValue - num1;
+            currentMathProblem = $"{num1} + {num2}";
+        }
+        else
+        {
+            num1 = Random.Range(targetValue, 1000);
+            num2 = num1 - targetValue;
+            currentMathProblem = $"{num1} - {num2}";
+        }
+
+        correctAngle = (int)((float)targetValue / 1000 * 360);
+        lockManager.SetCorrectAngle((int)correctAngle);
+
+        Debug.Log($"Generated problem: {currentMathProblem}, Target value: {targetValue}, Lock angle: {correctAngle}");
     }
-    else
-    {
-        num1 = Random.Range(targetValue, 1000);
-        num2 = num1 - targetValue;
-        currentMathProblem = $"{num1} - {num2}";
-    }
 
-    // Kilit açısını 0-360 derece aralığına dönüştür
-    correctAngle = (int)((float)targetValue / 1000 * 360);
-
-    lockManager.SetCorrectAngle((int)correctAngle);
-
-    Debug.Log($"Generated problem: {currentMathProblem}, Target value: {targetValue}, Lock angle: {correctAngle}");
-}
     private void CheckLockPosition()
     {
         if (lockManager.IsCorrectPosition())
@@ -152,7 +159,14 @@ private void Start()
         else
         {
             messageText.text = "Wrong answer. Try again!";
+            StartCoroutine(ChangeTextAfterDelay(2f, $"Solve: {currentMathProblem}\nRotate the lock to the correct angle."));
             SetGameState(GameState.WaitingForInput);
+        }
+
+        IEnumerator ChangeTextAfterDelay(float delay, string newText)
+        {
+            yield return new WaitForSeconds(delay);
+            messageText.text = newText;
         }
     }
 
@@ -178,8 +192,24 @@ private void Start()
 
     private void EndGame()
     {
-        messageText.text = "Congratulations! You've completed all steps!";
-        // Implement any additional end game logic here
+        Debug.Log("EndGame triggered");
+        StartCoroutine(ShowEndGameMenu());
+    }
+
+    private IEnumerator ShowEndGameMenu()
+    {
+        yield return new WaitForSeconds(3f); // Animasyon süresi
+        endGameMenu.SetActive(true); // Menü aktif hale getir
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void KeyCollected()
