@@ -69,12 +69,14 @@ public class RotaryControl : MonoBehaviour, IDragHandler, IEndDragHandler
     public float GetCurrentAngle() => currentAngle;
 
     private float NormalizeAngle(float angle)
-    {
-        angle %= 360;
-        if (angle < 0)
-            angle += 360;
-        return angle;
-    }
+{
+    angle %= 360;
+    if (angle > 0)
+        angle -= 360;
+
+    return angle;
+}
+
     public void ResetRotation()
     {
         currentAngle = 0;

@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
             currentMathProblem = $"{num1} - {num2}";
         }
 
-        correctAngle = (int)((float)targetValue / 1000 * 360);
+        correctAngle = (int)((float)targetValue / 1000 * 360)* -1;
         lockManager.SetCorrectAngle((int)correctAngle);
 
         Debug.Log($"Generated problem: {currentMathProblem}, Target value: {targetValue}, Lock angle: {correctAngle}");
@@ -192,23 +192,26 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
+        
         Debug.Log("EndGame triggered");
         StartCoroutine(ShowEndGameMenu());
     }
 
     private IEnumerator ShowEndGameMenu()
     {
-        yield return new WaitForSeconds(3f); // Animasyon süresi
+        yield return new WaitForSeconds(5f); // Animasyon süresi
         endGameMenu.SetActive(true); // Menü aktif hale getir
     }
 
     public void RestartGame()
     {
+       
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadMainMenu()
     {
+       
         SceneManager.LoadScene("MainMenu");
     }
 

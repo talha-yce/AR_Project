@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7021b89ced20a4944bb667c4eade42eb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - musicSource: {instanceID: 0}
+  - effectsSource: {instanceID: 0}
+  - backgroundMusic: {fileID: 8300000, guid: 1bedd46d5037d6a4fb52ee3cec42463d, type: 3}
+  - levelWinSound: {fileID: 8300000, guid: 0b230481c0019074c94114dbb8eda77b, type: 3}
+  - levelLoseSound: {fileID: 8300000, guid: 7e199acf96e1df44795630d3360ac351, type: 3}
+  - buttonClickSound: {fileID: 8300000, guid: 600ca625f153c9243a117a22f22b8424, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -10,7 +10,7 @@ public class LockManager : MonoBehaviour
     private GameManager gameManager;
     private RotaryControl rotaryControl;
 
-    private readonly int[] validAngles = { 0, 36, 72, 108, 144, 180, 216, 252, 288, 324 };
+    private readonly int[] validAngles = { 0, -36, -72, -108, -144, -180, -216, -252, -288, -324 };
 
     private void Start()
     {
@@ -72,6 +72,7 @@ public class LockManager : MonoBehaviour
 
     private void HandleCorrectCombination()
     {
+        
         Debug.Log("Doğru konum!");
         PlayVibrateAnimation();
         gameManager.IncrementStep();
@@ -79,6 +80,7 @@ public class LockManager : MonoBehaviour
 
     private void HandleWrongCombination()
     {
+       
         Debug.Log("Yanlış konum!");
         gameManager.SetGameState(GameManager.GameState.WaitingForInput);
     }
@@ -96,7 +98,7 @@ public class LockManager : MonoBehaviour
 
     public void SetCorrectAngle(int angle)
     {
-        correctAngle = FindClosestValidAngle(NormalizeAngle(angle));
+        correctAngle = angle;
     }
 
     public void SetCurrentAngle(int angle)

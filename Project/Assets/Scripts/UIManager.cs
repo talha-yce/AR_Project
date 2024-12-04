@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour
         // Eğer eksik kutu kalmamışsa (oyun bitmiş)
         if (canTower.eksikKonumlar.Count == 0)
         {
+            
             EndGame();
         }
     }
@@ -88,17 +89,20 @@ public class UIManager : MonoBehaviour
 
      private void EndGame()
     {
+       
         Debug.Log("EndGame triggered");
        endGameMenu.SetActive(true);
     }
 
    public void RestartGame()
     {
+       
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadMainMenu()
     {
+        
         SceneManager.LoadScene("MainMenu");
     }
 }
