@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokümanlar - SkyKids AR</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- AOS Animasyonlar -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Bubblegum Sans Yazı Tipi -->
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <!-- Özel Stil -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 transition-all duration-500">
+    <!-- Navbar -->
+    <header class="bg-white shadow-lg fixed w-full z-10">
+        <nav class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-28 transform hover:scale-110 transition duration-300">
+                </a>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Ana Sayfa</a></li>
+                    <li><a href="games.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Oyunlarımız</a></li>
+                    <li><a href="about.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Hakkımızda</a></li>
+                    <li><a href="contact.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">İletişim</a></li>
+                    <li><a href="documents.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Dokümanlar</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 px-4 md:px-6 py-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-800 text-center mb-12">SkyKids AR Dokümanlar</h1>
+
+        <!-- Bilgi ve İndirme Bölümü -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- GitHub Bağlantısı -->
+            <div class="text-center bg-white shadow-lg rounded-xl p-6" data-aos="fade-up">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4">GitHub Repo</h2>
+                <p class="text-gray-600 mb-6">Oyunların kaynak kodlarını incelemek için GitHub reposunu ziyaret edin.</p>
+                <a href="https://github.com/talha-yce/AR_Project" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">GitHub'a Git</a>
+            </div>
+
+            <!-- Trello Bağlantısı -->
+            <div class="text-center bg-white shadow-lg rounded-xl p-6" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4">Trello Yönetimi</h2>
+                <p class="text-gray-600 mb-6">Proje süreçlerini Trello'da görüntüleyin ve detayları keşfedin.</p>
+                <a href="https://trello.com/b/uW7gl2KS/arproject" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">Trello'ya Git</a>
+            </div>
+
+            <!-- Doküman İndir -->
+            <div class="text-center bg-white shadow-lg rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4">Doküman İndir</h2>
+                <p class="text-gray-600 mb-6">Oyun hakkında detaylı dokümanları indirin.</p>
+                <a href="documents\SkyKids_Projesi.pdf" download class="bg-yellow-500 hover:bg-yellow-600 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300">İndir</a>
+            </div>
+        </section>
+
+        <!-- Sıkça Sorulan Sorular -->
+        <section class="bg-white shadow-lg rounded-xl p-8" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-blue-800 text-center mb-8">Sıkça Sorulan Sorular</h2>
+            <div class="faq space-y-6">
+                <div>
+                    <button class="w-full text-left font-bold text-blue-800 text-lg flex items-center justify-between focus:outline-none" onclick="toggleFAQ('faq1')">
+                        <span>Oyun nasıl oynanır?</span>
+                        <span class="text-xl">+</span>
+                    </button>
+                    <div id="faq1" class="hidden mt-4 text-gray-600">
+                        <p>Oyunlarımız eğlenceli bir şekilde çocuklara öğretici görevler sunar. Örneğin, Teneke Kutu Kule oyununda eksik kutuları tamamlayarak kule yapabilir, Şifre Kırma oyununda matematik sorularını çözerek kilitleri açabilirsiniz.</p>
+                    </div>
+                </div>
+                <div>
+                    <button class="w-full text-left font-bold text-blue-800 text-lg flex items-center justify-between focus:outline-none" onclick="toggleFAQ('faq2')">
+                        <span>AR nedir?</span>
+                        <span class="text-xl">+</span>
+                    </button>
+                    <div id="faq2" class="hidden mt-4 text-gray-600">
+                        <p>Artırılmış Gerçeklik (AR), gerçek dünya ortamına dijital öğelerin entegre edildiği bir teknolojidir. SkyKids AR ile AR deneyimini eğlenceli oyunlarla yaşayabilirsiniz.</p>
+                    </div>
+                </div>
+                <div>
+                    <button class="w-full text-left font-bold text-blue-800 text-lg flex items-center justify-between focus:outline-none" onclick="toggleFAQ('faq3')">
+                        <span>Hızlı Başlangıç?</span>
+                        <span class="text-xl">+</span>
+                    </button>
+                    <div id="faq3" class="hidden mt-4 text-gray-600">
+                        <p>SkyKids AR uygulamasını indirin, oyun türünü seçin ve anında oynamaya başlayın. Uygulama AR desteğiyle kolayca çalışır.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <div class="mb-2 md:mb-0">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="w-24 mx-auto md:mx-0">
+                </div>
+                <div class="mb-2 md:mb-0 text-center">
+                    <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>info@skykidsar.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(id) {
+            const faq = document.getElementById(id);
+            faq.classList.toggle('hidden');
+        }
+    </script>
+
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

@@ -12,28 +12,24 @@
 <body class="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 transition-all duration-500">
 
     <header class="bg-white shadow-lg fixed w-full z-10">
-        <nav class="container mx-auto px-6 py-4">
+        <nav class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
                 <a href="index.html">
-                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-36 transform hover:scale-110 transition duration-300">
-                </a>                
-                <ul class="hidden md:flex space-x-8">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-28 transform hover:scale-110 transition duration-300">
+                </a>
+                <ul class="hidden md:flex space-x-6">
                     <li><a href="index.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Ana Sayfa</a></li>
                     <li><a href="games.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Oyunlarımız</a></li>
                     <li><a href="about.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Hakkımızda</a></li>
                     <li><a href="contact.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">İletişim</a></li>
+                    <li><a href="documents.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Dokümanlar</a></li>
                 </ul>
-                <button class="md:hidden focus:outline-none">
-                    <svg class="w-8 h-8 text-blue-600 hover:text-blue-800 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
         </nav>
     </header>
 
-    <main class="flex-grow pt-24 container mx-auto px-6 py-16">
-        <h1 class="text-5xl md:text-6xl font-bold text-blue-800 text-center mb-12" data-aos="zoom-in">Bize Ulaşın</h1>
+    <main class="flex-grow pt-32 px-4 md:px-6 py-16">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-800 text-center mb-12 mt-8" data-aos="zoom-in">Bize Ulaşın</h1>
         
         <!-- İletişim Bilgileri ve Form Bölümü -->
         <section class="contact-form bg-white rounded-3xl shadow-xl overflow-hidden p-8" data-aos="fade-up">
@@ -79,9 +75,20 @@
         </section>
     </main>
 
-    <footer class="bg-blue-600 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <div class="mb-2 md:mb-0">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="w-24 mx-auto md:mx-0">
+                </div>
+                <div class="mb-2 md:mb-0 text-center">
+                    <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>info@skykidsar.com</p>
+                </div>
+            </div>
         </div>
     </footer>
 

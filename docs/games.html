@@ -16,101 +16,134 @@
 <body class="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 transition-all duration-500">
     <!-- Navbar -->
     <header class="bg-white shadow-lg fixed w-full z-10">
-        <nav class="container mx-auto px-6 py-4">
+        <nav class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
                 <a href="index.html">
-                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-36 transform hover:scale-110 transition duration-300">
-                </a>                
-                <ul class="hidden md:flex space-x-8">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="logo w-28 transform hover:scale-110 transition duration-300">
+                </a>
+                <ul class="hidden md:flex space-x-6">
                     <li><a href="index.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Ana Sayfa</a></li>
                     <li><a href="games.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Oyunlarımız</a></li>
                     <li><a href="about.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Hakkımızda</a></li>
                     <li><a href="contact.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">İletişim</a></li>
+                    <li><a href="documents.html" class="text-blue-600 hover:text-blue-800 transition duration-300 border-b-2 border-transparent hover:border-blue-600">Dokümanlar</a></li>
                 </ul>
-                <button class="md:hidden focus:outline-none">
-                    <svg class="w-8 h-8 text-blue-600 hover:text-blue-800 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow pt-24 container mx-auto px-6 py-16">
-        <h1 class="text-5xl md:text-6xl font-bold text-blue-800 text-center mb-12" data-aos="zoom-in">Süper Eğlenceli AR Oyunlarımız</h1>
-        <section class="games grid grid-cols-1 md:grid-cols-3 gap-12">
-            <!-- Oyun Kartı 1 -->
-            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+    <main class="flex-grow pt-32 px-4 md:px-6 py-16">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-800 text-center mb-12 mt-8" data-aos="zoom-in">SkyKids AR Mobil Uygulama Oyunları</h1>
+
+        <!-- Oyunlar Sekmesi -->
+        <section class="games grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 md:gap-12">
+            <!-- Ana Oyun Kartı -->
+            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transition duration-300 hover:shadow-2xl mx-auto max-w-lg" data-aos="fade-up" data-aos-delay="100" id="gameDiv">
                 <div class="relative">
-                    <img src="img/game1.jpg" alt="Uçan Dostlar" class="w-full h-64 object-cover">
+                    <img src="img/kapak.png" alt="Ana Oyun" class="w-full h-64 object-cover rounded-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
-                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Uçan Dostlar</h3>
+                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">SkyKids AR</h3>
                 </div>
                 <div class="p-6">
-                    <p class="text-gray-600 mb-4">Gökyüzünde arkadaşlarınla maceraya atıl!</p>
-                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Oyna</button>
+                    <p class="text-gray-600 mb-4">Eğlenceli ve öğretici mobil oyun deneyimine başla!</p>
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg" onclick="showDetail()">İncele</button>
                 </div>
             </div>
-            <!-- Oyun Kartı 2 -->
-            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                <div class="relative">
-                    <img src="img/game2.jpg" alt="Gökyüzü Macerası" class="w-full h-64 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
-                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Gökyüzü Macerası</h3>
+
+            <!-- Game Detail Div -->
+            <div class="detail bg-white rounded-2xl shadow-xl overflow-hidden transition duration-300 hidden mx-auto max-w-4xl mt-12" id="detailDiv">
+                <div class="flex flex-wrap">
+                    <!-- Sol Kısım: Uygulama Kapağı -->
+                    <div class="w-full md:w-1/3 p-4">
+                        <img src="img/kapak.png" alt="Detaylı Oyun" class="w-full h-64 object-cover rounded-lg shadow-lg">
+                    </div>
+                    <!-- Sağ Kısım: Uygulama Bilgileri -->
+                    <div class="w-full md:w-2/3 p-4">
+                        <h3 class="text-3xl font-bold text-blue-800">SkyKids AR Detaylı Bilgiler</h3>
+                        <p class="text-gray-600 mt-4">Bu uygulama, eğlenceli ve öğretici oyunlar sunarak çocukların öğrenmesini daha keyifli hale getiriyor. Her yaştan kullanıcı için uygun oyunlar ve eğitici görevler içerir.</p>
+                        <div class="mt-6">
+                            <h4 class="text-2xl font-bold text-blue-800">Uygulama Özellikleri:</h4>
+                            <ul class="list-disc ml-6 mt-2 text-gray-600">
+                                <li>Çocuklar için eğlenceli görevler</li>
+                                <li>Farklı zorluk seviyeleri</li>
+                                <li>AR teknolojisi ile oyun deneyimi</li>
+                            </ul>
+                        </div>
+                        <button
+                        onclick="window.location.href='apk/Apk.apk';"
+                        class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full mt-6 transition duration-300 transform hover:scale-110 hover:shadow-lg">
+                        Oyna
+                      </button>
+                      
+                    </div>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-600 mb-4">Süper kahraman ol, gökyüzünde uç!</p>
-                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Oyna</button>
-                </div>
+
+                <!-- Uygulamalardaki Oyunlar -->
+<div class="applications mt-12 px-4">
+    <h4 class="text-2xl font-bold text-blue-800 mb-6 text-center">Uygulamalardaki Oyunlar</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <!-- Teneke Kutu Kule Oyunu -->
+        <div class="game-card bg-white rounded-2xl shadow-xl overflow-hidden transition duration-300 hover:shadow-xl mx-2 my-4">
+            <div class="relative">
+                <img src="img/kutu_kule.png" alt="Teneke Kutu Kule Oyunu" class="w-full h-48 object-cover rounded-lg">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
+                <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Teneke Kutu Kule Oyunu</h3>
             </div>
-            <!-- Oyun Kartı 3 -->
-            <div class="game bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="300">
-                <div class="relative">
-                    <img src="img/game3.jpg" alt="Dünya Turu" class="w-full h-64 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
-                    <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Dünya Turu</h3>
-                </div>
-                <div class="p-6">
-                    <p class="text-gray-600 mb-4">Dünyayı keşfet, yeni şeyler öğren!</p>
-                    <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-110 hover:shadow-lg">Oyna</button>
-                </div>
+            <div class="p-6">
+                <p class="text-gray-600 mb-4">Teneke kutulardan kuleler yaparak puan kazanın. Hedef yüksekliği yakalamak!</p>
+               
+            </div>
+        </div>
+
+        <!-- Şifre Kırma Oyunu -->
+        <div class="game-card bg-white rounded-2xl shadow-xl overflow-hidden transition duration-300 hover:shadow-xl mx-2 my-4">
+            <div class="relative">
+                <img src="img/sifre_kir.png" alt="Şifre Kırma Oyunu" class="w-full h-48 object-cover rounded-lg">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-70"></div>
+                <h3 class="absolute bottom-4 left-4 text-2xl font-bold text-white">Şifre Kırma Oyunu</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-gray-600 mb-4">Zekânızı test edin ve şifreleri çözerek bölümleri geçin!</p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+    <footer class="bg-blue-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <div class="mb-2 md:mb-0">
+                    <img src="img/logo.png" alt="SkyKids AR Logo" class="w-24 mx-auto md:mx-0">
+                </div>
+                <div class="mb-2 md:mb-0 text-center">
+                    <p>&copy; 2023 SkyKids AR. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>info@skykidsar.com</p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <script>
+        // Oyun Detaylarını Gösterme
+        function showDetail() {
+            document.getElementById("gameDiv").classList.add("hidden");
+            document.getElementById("detailDiv").classList.remove("hidden");
+        }
+    </script>
+
+    <!-- AOS JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-        });
-
-        // Navbar scroll efekti
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-opacity-100');
-                navbar.classList.remove('bg-opacity-90');
-            } else {
-                navbar.classList.add('bg-opacity-90');
-                navbar.classList.remove('bg-opacity-100');
-            }
-        });
-
-        // Menü açma/kapama
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.querySelector('nav ul');
-            menu.classList.toggle('hidden');
-        });
+        AOS.init();
     </script>
 </body>
 </html>
