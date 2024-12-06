@@ -21,6 +21,12 @@ I am using Trello for project management and task tracking. You can view the pro
 ## Web Page
 This project includes a web page containing additional information and features. You can access it [here](https://talha-yce.github.io/AR_Project).  
 
+## Project Documentation  
+This project includes a web page with detailed documentation and additional features.  
+You can access the project's documentation and resources on Google Drive via the following link:  
+[Project Documentation]([https://talha-yce.github.io/AR_Project](https://drive.google.com/drive/folders/1MQKOxW7zXFD9l7Q0wFIcpFYkKUhflslm?usp=sharing))
+
+
 ## License
 This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.  
 
