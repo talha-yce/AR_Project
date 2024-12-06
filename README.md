@@ -24,7 +24,7 @@ This project includes a web page containing additional information and features.
 ## Project Documentation  
 This project includes a web page with detailed documentation and additional features.  
 You can access the project's documentation and resources on Google Drive via the following link:  
-[Project Documentation]([https://talha-yce.github.io/AR_Project](https://drive.google.com/drive/folders/1MQKOxW7zXFD9l7Q0wFIcpFYkKUhflslm?usp=sharing))
+[Project Documentation](https://drive.google.com/drive/folders/1MQKOxW7zXFD9l7Q0wFIcpFYkKUhflslm?usp=sharing)
 
 
 ## License
