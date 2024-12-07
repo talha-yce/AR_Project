@@ -26,6 +26,10 @@ This project includes a web page with detailed documentation and additional feat
 You can access the project's documentation and resources on Google Drive via the following link:  
 [Project Documentation](https://drive.google.com/drive/folders/1MQKOxW7zXFD9l7Q0wFIcpFYkKUhflslm?usp=sharing)
 
+# Project Introduction Video  
+You can watch the introduction video for this project on YouTube:  
+[Project Introduction Video](https://www.youtube.com/watch?v=4lmQljtgLfg)  
+
 
 ## License
 This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.  
