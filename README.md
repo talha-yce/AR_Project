@@ -58,6 +58,11 @@ You can watch the introduction video for this project on YouTube:
 
 ---
 
+### How to Run the Project 
+For detailed instructions on how to run the project, please refer to the [Projeyi_Calistirma_Rehberi.md](Projeyi_Calistirma_Rehberi.md) file.
+
+---
+
 ### License
 This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.  
 
@@ -123,6 +128,11 @@ Tam ve güncel dokümantasyon için şu bağlantıyı ziyaret edebilirsiniz:
 ### Proje Tanıtım Videosu  
 Bu projenin tanıtım videosunu YouTube üzerinden izleyebilirsiniz:  
 [Proje Tanıtım Videosu](https://www.youtube.com/watch?v=4lmQljtgLfg)  
+
+---
+
+### Projeyi Çalıştırma Rehberi 
+Projeyi çalıştırmak için ayrıntılı talimatlara [Projeyi_Calistirma_Rehberi.md](Projeyi_Calistirma_Rehberi.md) dosyasından ulaşabilirsiniz.
 
 ---
 
